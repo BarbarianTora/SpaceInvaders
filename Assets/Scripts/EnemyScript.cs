@@ -17,7 +17,8 @@ public class EnemyScript : MonoBehaviour {
 
 	}
 
-	IEnumerator Move() {
+	IEnumerator Move() 
+	{
 
 			while (true) 
 		{
@@ -25,4 +26,5 @@ public class EnemyScript : MonoBehaviour {
 			transform.eulerAngles += new Vector3 ( 0, 180f, 0 );
 		}
 	}
+
 }
