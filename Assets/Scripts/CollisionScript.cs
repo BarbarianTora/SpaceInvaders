@@ -4,10 +4,11 @@ using System.Collections;
 public class collisionScript : MonoBehaviour {
 
 	private int _quantity;
+	private const string SPAWNER_NAME = "Spawner";
 
 	void Start () 
 	{
-		_quantity = GameObject.Find( "Spawner" ).GetComponent<SpawnerScript>().FighterQuantity;
+		_quantity = GameObject.Find(SPAWNER_NAME).GetComponent<SpawnerScript>().FighterQuantity;
 
 	}
 
@@ -25,7 +26,7 @@ public class collisionScript : MonoBehaviour {
 
 		Destroy (gameObject);
 
-		_quantity++;
+		_quantity--;
 
 	}
 

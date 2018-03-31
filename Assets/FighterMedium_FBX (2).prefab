@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 111465563385627028}
   - component: {fileID: 54325684757014782}
   - component: {fileID: 114686365765389102}
+  - component: {fileID: 114701310362372300}
   - component: {fileID: 65747481261587712}
   m_Layer: 0
   m_Name: FighterMedium_FBX (2)
@@ -167,3 +168,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6257a67f0304bf34aa02da919db510bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114701310362372300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579849256673548}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b309b19cc0b979944a990ad9785859d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  moveSpots:
+  - {fileID: 4059080330709258, guid: e9d4ef38a74db8e47ba65b8ef8ce3108, type: 2}
+  - {fileID: 4795080973460174, guid: 36a8484ebf43269448ae316b30020a3d, type: 2}
+  - {fileID: 4777966522182746, guid: 7542ea0a47fcaf847a1b70e9efe31b36, type: 2}
+  - {fileID: 4610881743897136, guid: 8f9abcf5f5ddccb4ba940801b1baecff, type: 2}
+  minX: -6.1
+  maxX: 6.1
+  minY: 9.57
+  maxY: 21.74
+  minZ: -11.51
+  maxZ: 0.67
