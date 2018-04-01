@@ -23,11 +23,10 @@ GameObject:
   - component: {fileID: 135146353678210338}
   - component: {fileID: 23010106573245762}
   - component: {fileID: 54115942174464804}
-  - component: {fileID: 114345985059351360}
   - component: {fileID: 114997972915621710}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,17 +100,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114345985059351360
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796275964807514}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95582ab8261a7364ab234b2d353a5ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114997972915621710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9248f05619a34b47949943cc7f2cfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletSpeed: 1500
+  _explotion: {fileID: 100006, guid: e4704660d196fac40802911e12ac76f1, type: 2}
 --- !u!135 &135146353678210338
 SphereCollider:
   m_ObjectHideFlags: 1

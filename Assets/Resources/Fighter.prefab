@@ -38,11 +38,11 @@ GameObject:
   - component: {fileID: 4157669921663762}
   - component: {fileID: 111348351064424736}
   - component: {fileID: 54115184360674596}
-  - component: {fileID: 114021828483257606}
+  - component: {fileID: 114478992618068992}
   - component: {fileID: 65394324562462958}
   m_Layer: 0
   m_Name: Fighter
-  m_TagString: Untagged
+  m_TagString: Fighter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +250,7 @@ Animation:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867389007843984}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations: []
@@ -272,14 +272,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114021828483257606
+--- !u!114 &114478992618068992
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867389007843984}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6257a67f0304bf34aa02da919db510bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2d85d996b987841b344903f00802f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.2
+  _xMax: 6
+  _zMax: 9.17
+  _xMin: -6
+  _zMin: -2.53
