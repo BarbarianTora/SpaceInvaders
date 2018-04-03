@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class BulletsManager : MonoBehaviour
 {
-	ObjectPooler objectPooler;
+	PoolManager objectPooler;
 	public Button _fireButton;
 
-	AudioSource bulletAudio;
+	[SerializeField]
+	private AudioSource bulletAudio = null;
+
+	[SerializeField]
+	private GameObject _bullet = null;
 
 	void Start()
 	{ 
+		PoolManager.instance.CreatePool ( _bullet, 5);
 		_fireButton.onClick.AddListener( OnButtonDown );  
 		bulletAudio = GetComponent<AudioSource>();
 	}
@@ -23,7 +28,7 @@ public class BulletsManager : MonoBehaviour
 
 	void Fire()
 	{
-		ObjectPooler.Instance.SpawnFromPool ( "Bullet", transform.position, Quaternion.identity );
 		bulletAudio.Play();
+		PoolManager.instance.ReuseObject (_bullet, transform.position, Quaternion.identity);
 	}
 }

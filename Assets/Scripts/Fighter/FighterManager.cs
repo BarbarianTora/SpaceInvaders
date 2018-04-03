@@ -20,36 +20,30 @@ public class FighterManager : MonoBehaviour {
 	[SerializeField]
 	private Vector3 size = new Vector3( SIZE_X, SIZE_Y, SIZE_Z );
 
-	[SerializeField]
-	private int fighterQuantity = 0;
-
 	void OnEnable()
 	{
-		BulletScript.OnHitTarget += DecreaseFighterQuantity;
+		BulletScript.OnHitTarget += RespawnFighter;
 	}
 
 	void OnDisable()
 	{
-		BulletScript.OnHitTarget -= DecreaseFighterQuantity;
+		BulletScript.OnHitTarget -= RespawnFighter;
 	}
 			
 	void Start () 
 	{
-		//SpawnFighter();
-	}
+		PoolManager.instance.CreatePool (Fighter, MAX_FIGHTERS);
 
-	void Update () 
-	{
-		if ( fighterQuantity < MAX_FIGHTERS )
+		for (int i = 0; i < MAX_FIGHTERS; i++) 
 		{
-			SpawnFighter();
+			SpawnFighter ();
 		}
 	}
 
-	private void DecreaseFighterQuantity()
+	private void RespawnFighter()
 	{
-		Debug.Log ("Hit fihgter");
-		fighterQuantity--;
+		Debug.Log ("Respawn fighter");
+		SpawnFighter ();
 	}
 
 	public void SpawnFighter()
@@ -60,10 +54,7 @@ public class FighterManager : MonoBehaviour {
 		
 		transform.position = pos;
 
-		ObjectPooler.Instance.SpawnFromPool ( "Fighter", pos, Quaternion.identity );
-
-		fighterQuantity++;
-	
+		PoolManager.instance.ReuseObject (Fighter, pos, Quaternion.identity);
 	}
 
 	void OnDrawGizmos()

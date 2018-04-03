@@ -20,9 +20,6 @@ public class RandomMovement : MonoBehaviour {
 	private float _time;
 	private float _angle;
 
-	[SerializeField]
-	private Transform _child = null;
-
 	public float lookSpeed = 10;
 	private Vector3 curLoc;
     private Vector3 prevLoc;
