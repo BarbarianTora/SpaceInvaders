@@ -20,8 +20,17 @@ public class RandomMovement : MonoBehaviour {
 	private float _time;
 	private float _angle;
 
+	[SerializeField]
+	private Transform _child = null;
+
+	public float lookSpeed = 10;
+	private Vector3 curLoc;
+    private Vector3 prevLoc;
+
 	void Start () 
 	{
+		curLoc = transform.position;
+
 		_x = Random.Range( -fighterSpeed, fighterSpeed );
 		_z = Random.Range( -fighterSpeed, fighterSpeed );
 		_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
@@ -36,31 +45,31 @@ public class RandomMovement : MonoBehaviour {
 		if ( transform.localPosition.x > _xMax ) 
 		{
 			_x = Random.Range( -fighterSpeed, 0.0f );
-			_angle = Mathf.Atan2( _x, _z ) * ( _period/ _pi ) + _halfPeriod;
-			transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
+			//_angle = Mathf.Atan2( _x, _z ) * ( _period/ _pi ) + _halfPeriod;
+			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
 			_time = 0.0f; 
 		}
 
 		if ( transform.localPosition.x < _xMin ) 
 		{
 			_x = Random.Range(0.0f, fighterSpeed);
-			_angle = Mathf.Atan2(_x, _z) * (_period / _pi ) + _halfPeriod;
-			transform.localRotation = Quaternion.Euler(0, _angle, 0); 
+			//_angle = Mathf.Atan2(_x, _z) * (_period / _pi ) + _halfPeriod;
+			//transform.localRotation = Quaternion.Euler(0, _angle, 0); 
 			_time = 0.0f; 
 		}
 
 		if ( transform.localPosition.z > _zMax ) 
 		{
 			_z = Random.Range( -fighterSpeed, 0.0f );
-			_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
-			transform.localRotation = Quaternion.Euler( 0, _angle, 0 ); 
+			//_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
+			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 ); 
 			_time = 0.0f; 
 		}
 
 		if ( transform.localPosition.z < _zMin ) {
 			_z = Random.Range(0.0f, fighterSpeed);
-			_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
-			transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
+			//_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
+			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
 			_time = 0.0f; 
 		}
 
@@ -69,14 +78,22 @@ public class RandomMovement : MonoBehaviour {
 		{
 			_x = Random.Range( -fighterSpeed, fighterSpeed );
 			_z = Random.Range( -fighterSpeed, fighterSpeed );
-			_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
-			transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
+			//_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
+			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
 			_time = 0.0f;
 		}
 
-		transform.localPosition = new Vector3( transform.localPosition.x + _x,
-											   transform.localPosition.y,
-											   transform.localPosition.z + _z );
+		Vector3 newPosition = new Vector3( transform.localPosition.x + _x,
+										transform.localPosition.y,
+										transform.localPosition.z + _z );
+
+		transform.localPosition = newPosition;
+		 
+		prevLoc = curLoc;
+		curLoc = transform.position;
+
+		transform.rotation = Quaternion.Lerp (transform.rotation,  
+			Quaternion.LookRotation(transform.position - prevLoc), Time.fixedDeltaTime * lookSpeed);
 
 	}
 }
