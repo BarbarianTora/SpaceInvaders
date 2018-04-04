@@ -16,8 +16,8 @@ public class BulletsManager : MonoBehaviour
 
 	void Start()
 	{ 
-		PoolManager.instance.CreatePool ( _bullet, 5);
-		_fireButton.onClick.AddListener( OnButtonDown );  
+		PoolManager.instance.CreatePool (_bullet, 5);
+		_fireButton.onClick.AddListener(OnButtonDown);  
 		bulletAudio = GetComponent<AudioSource>();
 	}
 

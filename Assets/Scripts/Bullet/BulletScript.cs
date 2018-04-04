@@ -20,16 +20,20 @@ public class BulletScript : MonoBehaviour, IPooledObjects
 
 	private int _quantity;
 
+	[SerializeField]
+	private FighterManager _fighterManager = null;
+
 	void Awake()
 	{
 		_curRigidBody = GetComponent<Rigidbody>();
 		_curTransform = transform;
+		_fighterManager = GameObject.FindObjectOfType<FighterManager> ();
 	}
 
 	void OnEnable()
 	{
 		_curRigidBody.AddForce (_curTransform.forward * _bulletSpeed);
-		OnObjectSpawn();
+		//OnObjectSpawn();
 	}
 
 	void OnDisable()
@@ -44,23 +48,43 @@ public class BulletScript : MonoBehaviour, IPooledObjects
 
 	void hideBullet()
 	{
-		gameObject.SetActive( false );
-	}
-
-	void OnTriggerEnter( Collider col )
-	{
-		GameObject explosion = Instantiate(_explotion, _curTransform.position, Quaternion.identity);
-
-		//Destroy(col.gameObject);
-
-		col.gameObject.SetActive(false);
-
-		Destroy (explosion, 2);
-
-		if (OnHitTarget != null)
-			OnHitTarget ();
-
 		gameObject.SetActive(false);
 	}
+
+	void OnTriggerEnter(Collider col)
+	{
+//		StartCoroutine (DelayHitFighter (col));
+		GameObject explosion = Instantiate(_explotion, _curTransform.position, Quaternion.identity);
+		col.gameObject.SetActive (false);
+		_fighterManager.SpawnFighter ();
+		gameObject.SetActive(false);
+		Destroy (explosion, 2);
+
+
+	}
+
+//	private IEnumerator DelayHitFighter(Collider col)
+//	{
+//		GameObject explosion = Instantiate(_explotion, _curTransform.position, Quaternion.identity);
+//
+//		col.gameObject.SetActive (false);
+//
+//		//yield return new WaitForEndOfFrame ();
+//
+//		//col.gameObject.GetComponent<PoolObject> ().Deactivate ();
+//
+//		yield return new WaitForEndOfFrame ();
+//
+//		_fighterManager.SpawnFighter ();
+//
+//		yield return new WaitForEndOfFrame ();
+//
+//		gameObject.SetActive(false);
+//
+//		yield return new WaitForSeconds (2f);
+//
+//		Destroy (explosion);
+//
+//	}
 
 }

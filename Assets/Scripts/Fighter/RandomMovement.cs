@@ -28,10 +28,10 @@ public class RandomMovement : MonoBehaviour {
 	{
 		curLoc = transform.position;
 
-		_x = Random.Range( -fighterSpeed, fighterSpeed );
-		_z = Random.Range( -fighterSpeed, fighterSpeed );
-		_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
-		transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
+		_x = Random.Range(-fighterSpeed, fighterSpeed);
+		_z = Random.Range(-fighterSpeed, fighterSpeed);
+		_angle = Mathf.Atan2(_x, _z) * (_period / _pi) + _halfPeriod;
+		transform.localRotation = Quaternion.Euler(0, _angle, 0);
 	}
 
 	void Update () 
@@ -39,15 +39,15 @@ public class RandomMovement : MonoBehaviour {
 
 		_time += Time.deltaTime;
 
-		if ( transform.localPosition.x > _xMax ) 
+		if (transform.localPosition.x > _xMax) 
 		{
-			_x = Random.Range( -fighterSpeed, 0.0f );
+			_x = Random.Range(-fighterSpeed, 0.0f);
 			//_angle = Mathf.Atan2( _x, _z ) * ( _period/ _pi ) + _halfPeriod;
 			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
 			_time = 0.0f; 
 		}
 
-		if ( transform.localPosition.x < _xMin ) 
+		if (transform.localPosition.x < _xMin) 
 		{
 			_x = Random.Range(0.0f, fighterSpeed);
 			//_angle = Mathf.Atan2(_x, _z) * (_period / _pi ) + _halfPeriod;
@@ -55,15 +55,16 @@ public class RandomMovement : MonoBehaviour {
 			_time = 0.0f; 
 		}
 
-		if ( transform.localPosition.z > _zMax ) 
+		if (transform.localPosition.z > _zMax) 
 		{
-			_z = Random.Range( -fighterSpeed, 0.0f );
+			_z = Random.Range(-fighterSpeed, 0.0f);
 			//_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
 			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 ); 
 			_time = 0.0f; 
 		}
 
-		if ( transform.localPosition.z < _zMin ) {
+		if (transform.localPosition.z < _zMin) 
+		{
 			_z = Random.Range(0.0f, fighterSpeed);
 			//_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
 			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
@@ -71,18 +72,18 @@ public class RandomMovement : MonoBehaviour {
 		}
 
 
-		if ( _time > 1.0f ) 
+		if (_time > 1.0f ) 
 		{
-			_x = Random.Range( -fighterSpeed, fighterSpeed );
-			_z = Random.Range( -fighterSpeed, fighterSpeed );
+			_x = Random.Range(-fighterSpeed, fighterSpeed);
+			_z = Random.Range(-fighterSpeed, fighterSpeed);
 			//_angle = Mathf.Atan2( _x, _z ) * ( _period / _pi ) + _halfPeriod;
 			//transform.localRotation = Quaternion.Euler( 0, _angle, 0 );
 			_time = 0.0f;
 		}
 
-		Vector3 newPosition = new Vector3( transform.localPosition.x + _x,
-										transform.localPosition.y,
-										transform.localPosition.z + _z );
+		Vector3 newPosition = new Vector3(transform.localPosition.x + _x,
+										  transform.localPosition.y,
+										  transform.localPosition.z + _z);
 
 		transform.localPosition = newPosition;
 		 
@@ -90,7 +91,8 @@ public class RandomMovement : MonoBehaviour {
 		curLoc = transform.position;
 
 		transform.rotation = Quaternion.Lerp (transform.rotation,  
-			Quaternion.LookRotation(transform.position - prevLoc), Time.fixedDeltaTime * lookSpeed);
-
+											  Quaternion.LookRotation(transform.position - prevLoc),
+											  Time.fixedDeltaTime * lookSpeed);
+					
 	}
 }
