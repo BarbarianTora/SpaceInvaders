@@ -21,12 +21,12 @@ public class RandomMovement : MonoBehaviour {
 	private float _angle;
 
 	public float lookSpeed = 10;
-	private Vector3 curLoc;
-    private Vector3 prevLoc;
+	private Vector3 _curLoc;
+	private Vector3 _prevLoc;
 
 	void Start () 
 	{
-		curLoc = transform.position;
+		_curLoc = transform.position;
 
 		_x = Random.Range(-fighterSpeed, fighterSpeed);
 		_z = Random.Range(-fighterSpeed, fighterSpeed);
@@ -87,12 +87,12 @@ public class RandomMovement : MonoBehaviour {
 
 		transform.localPosition = newPosition;
 		 
-		prevLoc = curLoc;
-		curLoc = transform.position;
+		_prevLoc = _curLoc;
+		_curLoc = transform.position;
 
 		transform.rotation = Quaternion.Lerp (transform.rotation,  
-											  Quaternion.LookRotation(transform.position - prevLoc),
-											  Time.fixedDeltaTime * lookSpeed);
+								   Quaternion.LookRotation(transform.position - _prevLoc),
+								   Time.fixedDeltaTime * lookSpeed);
 					
 	}
 }

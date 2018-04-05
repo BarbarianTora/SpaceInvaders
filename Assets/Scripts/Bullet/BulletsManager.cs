@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BulletsManager : MonoBehaviour
 {
 	PoolManager objectPooler;
-	public Button _fireButton;
+	public Button _fireButton = null;
 
 	[SerializeField]
 	private AudioSource bulletAudio = null;
@@ -14,11 +14,15 @@ public class BulletsManager : MonoBehaviour
 	[SerializeField]
 	private GameObject _bullet = null;
 
+	private Transform _cameraMainTransform;
+
 	void Start()
 	{ 
 		PoolManager.instance.CreatePool (_bullet, 5);
 		_fireButton.onClick.AddListener(OnButtonDown);  
 		bulletAudio = GetComponent<AudioSource>();
+
+		_cameraMainTransform = Camera.main.transform;
 	}
 
 	void OnButtonDown()
@@ -29,6 +33,6 @@ public class BulletsManager : MonoBehaviour
 	void Fire()
 	{
 		bulletAudio.Play();
-		PoolManager.instance.ReuseObject (_bullet, transform.position, Quaternion.identity);
+		PoolManager.instance.ReuseObject (_bullet, _cameraMainTransform.position, _cameraMainTransform.rotation);
 	}
 }

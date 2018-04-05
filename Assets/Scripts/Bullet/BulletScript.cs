@@ -4,41 +4,37 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour, IPooledObjects 
 {	
-	public delegate void HitTargetHandler();
-	public static event HitTargetHandler OnHitTarget;
-
+	private const string FIGHTER_TAG = "Fighter";
 	private const string SPAWNER_NAME = "Spawner";
 
 	[SerializeField]
 	private float _bulletSpeed = 1500f;
-
 	[SerializeField]
 	private GameObject _explotion = null;
-
-	private Rigidbody _curRigidBody = null;
-	private Transform _curTransform = null;
-
-	private int _quantity;
-
 	[SerializeField]
 	private FighterManager _fighterManager = null;
 
+	private Rigidbody _curRigidBody = null;
+	private Transform _curTransform = null;
+	private GameObject _bullet = null;
+
+	private Transform _cameraMainTransform;
+
 	void Awake()
 	{
+		_bullet = gameObject;
 		_curRigidBody = GetComponent<Rigidbody>();
 		_curTransform = transform;
 		_fighterManager = GameObject.FindObjectOfType<FighterManager> ();
+
+		_cameraMainTransform = Camera.main.transform;
 	}
 
 	void OnEnable()
 	{
-		_curRigidBody.AddForce (_curTransform.forward * _bulletSpeed);
-		//OnObjectSpawn();
-	}
-
-	void OnDisable()
-	{
 		_curRigidBody.velocity = Vector3.zero;
+		_curRigidBody.AddForce (_cameraMainTransform.forward * _bulletSpeed);
+		OnObjectSpawn ();
 	}
 
 	public void OnObjectSpawn()
@@ -53,38 +49,15 @@ public class BulletScript : MonoBehaviour, IPooledObjects
 
 	void OnTriggerEnter(Collider col)
 	{
-//		StartCoroutine (DelayHitFighter (col));
-		GameObject explosion = Instantiate(_explotion, _curTransform.position, Quaternion.identity);
-		col.gameObject.SetActive (false);
-		_fighterManager.SpawnFighter ();
-		gameObject.SetActive(false);
-		Destroy (explosion, 2);
+		if (col.tag == FIGHTER_TAG) 
+		{
+			PoolManager.instance.ReuseObject(_explotion, _curTransform.position, Quaternion.identity);
 
+			_fighterManager.RespawnFighter (col.transform);
+
+			_bullet.SetActive(false);
+
+		}
 
 	}
-
-//	private IEnumerator DelayHitFighter(Collider col)
-//	{
-//		GameObject explosion = Instantiate(_explotion, _curTransform.position, Quaternion.identity);
-//
-//		col.gameObject.SetActive (false);
-//
-//		//yield return new WaitForEndOfFrame ();
-//
-//		//col.gameObject.GetComponent<PoolObject> ().Deactivate ();
-//
-//		yield return new WaitForEndOfFrame ();
-//
-//		_fighterManager.SpawnFighter ();
-//
-//		yield return new WaitForEndOfFrame ();
-//
-//		gameObject.SetActive(false);
-//
-//		yield return new WaitForSeconds (2f);
-//
-//		Destroy (explosion);
-//
-//	}
-
 }
